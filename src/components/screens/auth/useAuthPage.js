@@ -9,7 +9,7 @@ import AuthService from '../../../services/auth.service'
 
 export const useAuthPage = () => {
 	const [type, setType] = useState('login')
-
+	const [nameShow, setNameShow] = useState(false)
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +30,7 @@ export const useAuthPage = () => {
 
 	const { mutate, isLoading } = useMutation(
 		['auth'],
-		({ email, password }) => AuthService.main(email, password, type),
+		({ email, password, name }) => AuthService.main( name, password,  email, type),
 		{
 			onSuccess: () => {
 				setIsAuth(true)
@@ -45,6 +45,9 @@ export const useAuthPage = () => {
 
 	return useMemo(
 		() => ({
+			nameShow,
+			setNameShow,
+			type,
 			setType,
 			register,
 			handleSubmit,

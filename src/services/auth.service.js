@@ -4,11 +4,12 @@ import { $axios } from '../api'
 import { TOKEN } from '../app.constants'
 
 class AuthService {
-	async main(email, password, type) {
+	async main(email, password,name, type) {
 		try {
 			const { data } = await $axios.post(`/auth/${type}`, {
 				email,
-				password
+				password,
+				name
 			})
 
 			if (data.token) Cookies.set(TOKEN, data.token)
